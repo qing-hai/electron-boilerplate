@@ -71,12 +71,18 @@ gulp.task('watch', () => {
   watch('src/**/*.js', batch((events, done) => {
     gulp.start('bundle', beepOnError(done));
   }));
+
   watch('src/**/*.less', batch((events, done) => {
     gulp.start('less', beepOnError(done));
+  }));
+
+    watch('src/**/*.html', batch((events, done) => {
+    gulp.start('html', beepOnError(done));
   }));
 });
 
 gulp.task('build',function(callback) {
-  runSequence('clean',
-              ['bundle', 'less','html', 'environment']);
+   runSequence('clean',
+              ['bundle', 'less','html', 'environment'],
+              callback);
 });
