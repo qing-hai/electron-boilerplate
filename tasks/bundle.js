@@ -1,6 +1,7 @@
 const path = require('path');
 const jetpack = require('fs-jetpack');
 const rollup = require('rollup').rollup;
+const typescript =require('rollup-plugin-typescript2');
 
 const nodeBuiltInModules = ['assert', 'buffer', 'child_process', 'cluster',
   'console', 'constants', 'crypto', 'dgram', 'dns', 'domain', 'events',
@@ -27,6 +28,7 @@ module.exports = (src, dest, opts) => {
 
   const plugins = [
     // Add rollup plugins here
+    typescript(),
   ];
 
   return rollup({

@@ -48,8 +48,11 @@
     "mocha": "^3.2.0",
     "rollup": "^0.41.4",
     "rollup-plugin-istanbul": "^1.1.0",
+    "rollup-plugin-typescript2": "^0.3.0",
     "run-sequence": "^1.2.2",
     "source-map-support": "^0.4.11",
-    "spectron": "^3.6.0"
+    "spectron": "^3.6.0",
+    "tslib": "^1.6.0",
+    "typescript": "^2.2.2"
   }
 }
