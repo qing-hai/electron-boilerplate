@@ -15,6 +15,7 @@ const appDir = jetpack.cwd(app.getAppPath());
 
 // Holy crap! This is browser window with HTML and stuff, but I can read
 // here files form disk like it's node.js! Welcome to Electron world :)
+
 const manifest = appDir.read('package.json', 'json');
 
 const osMap = {

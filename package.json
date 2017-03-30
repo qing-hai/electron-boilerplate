@@ -1,6 +1,6 @@
 {
-  "name": "electron-boilerplate",
-  "productName": "Electron Boilerplate",
+  "name": "electron-fusebox-ts-boilerplate",
+  "productName": "Electron FuseBox Typescript Boilerplate",
   "description": "Starter for your Electron application",
   "version": "0.0.0",
   "author": "Mr. Gumby <mr.gumby@example.com>",
@@ -48,6 +48,7 @@
     "mocha": "^3.2.0",
     "rollup": "^0.41.4",
     "rollup-plugin-istanbul": "^1.1.0",
+    "run-sequence": "^1.2.2",
     "source-map-support": "^0.4.11",
     "spectron": "^3.6.0"
   }

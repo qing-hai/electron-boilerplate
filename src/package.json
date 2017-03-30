@@ -1,0 +1,15 @@
+{
+  "name": "electron-fusebox-ts-boilerplate",
+  "productName": "electron-fusebox-ts-boilerplate",
+  "identifier": "com.example",
+  "description": "example app",
+  "homepage": "http://www.example.com",
+  "version": "0.0.1",
+  "author": "qinghai <qinghai@gmail.com>",
+  "license": "commercial",
+  "main": "app.js",
+  
+  "dependencies": {
+    
+  }
+}
