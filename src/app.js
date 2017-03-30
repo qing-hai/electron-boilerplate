@@ -5,21 +5,31 @@ import './helpers/context_menu.js';
 import './helpers/external_links.js';
 
 // All stuff below is just to show you how it works. You can delete all of it.
-import { remote } from 'electron';
+import { remote ,BrowserWindow} from 'electron';
 import jetpack from 'fs-jetpack';
 import { greet } from './hello_world/hello_world';
 import env from './env';
 
+
 const app = remote.app;
 const appDir = jetpack.cwd(app.getAppPath());
 
+app.on("browser-window-focus", (e, win) => {
+  const electronLocalshortcut =  remote.require("electron-localshortcut");
+  electronLocalshortcut.register(win, 'Ctrl+B', () => {
+		console.log('You pressed ctrl & B');
+	});
+});
+
+
 // Holy crap! This is browser window with HTML and stuff, but I can read
 // here files form disk like it's node.js! Welcome to Electron world :)
+
 const manifest = appDir.read('package.json', 'json');
 
 const osMap = {
   win32: 'Windows',
-  darwin: 'macOS',
+  darwin: 'macOS' , 
   linux: 'Linux',
 };
 

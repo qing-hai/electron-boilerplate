@@ -3,37 +3,25 @@
 // It doesn't have any windows which you can see on screen, but we can open
 // window from here.
 
-import path from 'path';
-import url from 'url';
-import { app, Menu } from 'electron';
-import { devMenuTemplate } from './menu/dev_menu_template';
-import { editMenuTemplate } from './menu/edit_menu_template';
+const {app, BrowserWindow} = require('electron');
 import createWindow from './helpers/window';
+import url from 'url';
+import path from 'path';
 
-// Special module holding environment variables which you declared
-// in config/env_xxx.json file.
-import env from './env';
+require('electron-debug')({showDevTools: true});
 
-const setApplicationMenu = () => {
-  const menus = [editMenuTemplate];
-  if (env.name !== 'production') {
-    menus.push(devMenuTemplate);
-  }
-  Menu.setApplicationMenu(Menu.buildFromTemplate(menus));
-};
+const isDev = require('electron-is-dev');
 
-// Save userData in separate folders for each environment.
-// Thanks to this you can use production and development versions of the app
-// on same machine like those are two separate apps.
-if (env.name !== 'production') {
-  const userDataPath = app.getPath('userData');
-  app.setPath('userData', `${userDataPath} (${env.name})`);
+if (isDev) {
+	console.log('Running in development');
+} else {
+	console.log('Running in production');
 }
 
-app.on('ready', () => {
-  setApplicationMenu();
+let win;
 
-  const mainWindow = createWindow('main', {
+app.on('ready', () => {
+	const mainWindow = createWindow('main', {
     width: 1000,
     height: 600,
   });
@@ -44,9 +32,6 @@ app.on('ready', () => {
     slashes: true,
   }));
 
-  if (env.name === 'development') {
-    mainWindow.openDevTools();
-  }
 });
 
 app.on('window-all-closed', () => {
