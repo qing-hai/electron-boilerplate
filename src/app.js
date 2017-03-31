@@ -14,11 +14,11 @@ import env from './env';
 const app = remote.app;
 const appDir = jetpack.cwd(app.getAppPath());
 
-app.on("browser-window-focus", (e, win) => {
-  const electronLocalshortcut =  remote.require("electron-localshortcut");
-  electronLocalshortcut.register(win, 'Ctrl+B', () => {
-		console.log('You pressed ctrl & B');
-	});
+const electronLocalshortcut =  remote.require("electron-localshortcut");
+
+let win=remote.BrowserWindow.getFocusedWindow();
+win && electronLocalshortcut.register(win, 'Ctrl+B', () => {
+  console.log('You pressed ctrl & B');
 });
 
 
