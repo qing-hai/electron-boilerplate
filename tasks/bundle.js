@@ -2,11 +2,11 @@ const path = require('path');
 const jetpack = require('fs-jetpack');
 const rollup = require('rollup').rollup;
 
-console.log("before rollup-plugin-typescript2")
+//console.log("before rollup-plugin-typescript2")
 
 const typescript =require('rollup-plugin-typescript2');
 
-console.log("after rollup-plugin-typescript2");
+//console.log("after rollup-plugin-typescript2");
 
 const nodeBuiltInModules = ['assert', 'buffer', 'child_process', 'cluster',
   'console', 'constants', 'crypto', 'dgram', 'dns', 'domain', 'events',
@@ -19,7 +19,7 @@ const electronBuiltInModules = ['electron'];
 const generateExternalModulesList = () => {
   const appManifest = jetpack.read('./src/package.json', 'json');
 
-  console.log(Object.keys(appManifest.dependencies));
+ // console.log(Object.keys(appManifest.dependencies));
   return [].concat(
     nodeBuiltInModules,
     electronBuiltInModules,

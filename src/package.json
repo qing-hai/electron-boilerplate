@@ -12,7 +12,5 @@
     "fs-jetpack": "^0.13.3",
     "lodash": "^4.17.4"
   },
-  "devDependencies": {
-    
-  }
+  "devDependencies": {}
 }
