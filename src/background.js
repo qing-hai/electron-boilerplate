@@ -35,7 +35,7 @@ app.on('ready', () => {
 
   const mainWindow = createWindow('main', {
     width: 1000,
-    height: 600,
+    height: 610,
   });
 
   mainWindow.loadURL(url.format({
@@ -50,5 +50,8 @@ app.on('ready', () => {
 });
 
 app.on('window-all-closed', () => {
+  console.log("window all closed")
   app.quit();
+
+  //setTimeout(()=>{ process.exit()}, 1000)
 });

@@ -69,6 +69,7 @@ gulp.task('watch', () => {
   };
 
   watch('src/**/*.[j,t]s', batch((events, done) => {
+    console.log("re-bundle");
     gulp.start('bundle', beepOnError(done));
   }));
 
