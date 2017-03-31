@@ -9,6 +9,7 @@ const jetpack = require('fs-jetpack');
 const bundle = require('./bundle');
 const utils = require('./utils');
 
+const shelljs=require("shelljs");
 
 const projectDir = jetpack;
 const srcDir = jetpack.cwd('./src');
@@ -47,7 +48,7 @@ gulp.task('environment', () => {
 });
 
 
-gulp.task('link',['copy'],function(){
+gulp.task('link-modules',function(){
     var shellCmd="";
     if (process.platform === 'win32'){
 	    shellCmd='mklink /J ".\\app\\node_modules" ".\\src\\node_modules"';
@@ -84,6 +85,6 @@ gulp.task('watch', () => {
 
 gulp.task('build',function(callback) {
    runSequence('clean',
-              ['bundle', 'less','html', 'environment'],
+              ['link-modules','bundle', 'less','html', 'environment'],
               callback);
 });
