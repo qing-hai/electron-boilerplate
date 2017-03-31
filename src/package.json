@@ -8,8 +8,11 @@
   "author": "qinghai <qinghai@gmail.com>",
   "license": "commercial",
   "main": "app.js",
-  
   "dependencies": {
+    "fs-jetpack": "^0.13.3",
+    "lodash": "^4.17.4"
+  },
+  "devDependencies": {
     
   }
 }
