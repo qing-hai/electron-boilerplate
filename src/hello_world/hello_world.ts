@@ -5,6 +5,6 @@ export const bye = () => {
 };
 
 export function greet(name:string="qinghai"){
-  return  `Hello Worldss! ${name} lodash: ${VERSION}`;
+  return  `Hello World! ${name} lodash: ${VERSION}`;
  // return  `Hello World! ${name} lodash: ${VERSION}`;
 }

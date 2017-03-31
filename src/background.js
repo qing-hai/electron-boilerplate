@@ -50,8 +50,5 @@ app.on('ready', () => {
 });
 
 app.on('window-all-closed', () => {
-  console.log("window all closed")
   app.quit();
-
-  //setTimeout(()=>{ process.exit()}, 1000)
 });
