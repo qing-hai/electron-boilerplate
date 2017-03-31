@@ -10,8 +10,10 @@
   "main": "app.js",
   "dependencies": {
     "electron-debug": "^1.1.0",
+
     "electron-is-dev": "^0.1.2",
     "electron-localshortcut": "^1.1.1",
+
     "fs-jetpack": "^0.13.3",
     "lodash": "^4.17.4"
   },

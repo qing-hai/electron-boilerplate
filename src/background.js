@@ -10,6 +10,7 @@ import path from 'path';
 
 require('electron-debug')({showDevTools: true});
 
+
 const isDev = require('electron-is-dev');
 
 if (isDev) {
@@ -19,6 +20,7 @@ if (isDev) {
 }
 
 let win;
+
 
 app.on('ready', () => {
 	const mainWindow = createWindow('main', {
