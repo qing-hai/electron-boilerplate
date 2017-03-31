@@ -10,7 +10,6 @@ import jetpack from 'fs-jetpack';
 import { greet } from './hello_world/hello_world';
 import env from './env';
 
-
 const app = remote.app;
 const appDir = jetpack.cwd(app.getAppPath());
 
@@ -21,6 +20,14 @@ win && electronLocalshortcut.register(win, 'Ctrl+B', () => {
   console.log('You pressed ctrl & B');
 });
 
+
+const isDev = require('electron-is-dev');
+
+if (isDev) {
+	console.log('Running in development');
+} else {
+	console.log('Running in production');
+}
 
 // Holy crap! This is browser window with HTML and stuff, but I can read
 // here files form disk like it's node.js! Welcome to Electron world :)

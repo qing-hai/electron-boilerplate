@@ -4,9 +4,10 @@
 // window from here.
 
 const {app, BrowserWindow} = require('electron');
-import createWindow from './helpers/window';
 import url from 'url';
 import path from 'path';
+const windowStateKeeper = require('electron-window-state');
+
 
 require('electron-debug')({showDevTools: true});
 
@@ -19,13 +20,21 @@ if (isDev) {
 	console.log('Running in production');
 }
 
-let win;
-
 
 app.on('ready', () => {
-	const mainWindow = createWindow('main', {
-    width: 1000,
-    height: 600,
+
+  // Load the previous state with fallback to defaults
+  let mainWindowState = windowStateKeeper({
+    defaultWidth: 1000,
+    defaultHeight: 600
+  });  
+
+// Create the window using the state information
+  let mainWindow = new BrowserWindow({
+    'x': mainWindowState.x,
+    'y': mainWindowState.y,
+    'width': mainWindowState.width,
+    'height': mainWindowState.height
   });
 
   mainWindow.loadURL(url.format({
@@ -33,7 +42,8 @@ app.on('ready', () => {
     protocol: 'file:',
     slashes: true,
   }));
-
+  
+  mainWindowState.manage(mainWindow);
 });
 
 app.on('window-all-closed', () => {
