@@ -9,11 +9,7 @@ const jetpack = require('fs-jetpack');
 const bundle = require('./bundle');
 const utils = require('./utils');
 const shelljs=require("shelljs");
-const uglifyjs = require('uglify-js-harmony'); // can be a git checkout 
-                                     // or another module (such as `uglify-js-harmony` for ES6 support) 
-const minifier = require('gulp-uglify/minifier');
 
-const combiner=require("stream-combiner2");
 
 const projectDir = jetpack;
 const srcDir = jetpack.cwd('./src');
@@ -49,25 +45,6 @@ gulp.task('less',() => {
 gulp.task('html', () => {
   return gulp.src(srcDir.path('**/*.html'))
    .pipe(gulp.dest(destDir.path()));
-});
-
-gulp.task('uglify-js', function() {
-    let combined = combiner.obj([
-        gulp.src(['./app/**/*.js','!./app/node_modules/**/*.js','!./app/**/*min.js']),
-        minifier({  
-             compress: {
-                    unused: false
-             },
-             //mangle:false
-        }, uglifyjs),
-        gulp.dest(destDir.path())
-    ]);
-
-  // any errors in the above streams will get caught
-  // by this listener, instead of being thrown:
-  combined.on('error', console.error.bind(console));
-
-  return combined;
 });
 
 
@@ -167,6 +144,5 @@ gulp.task('build',function(callback) {
    }else
       runSequence('clean',
                 ['copy-node-modules','bundle', 'less','html', 'environment'],
-                ['uglify-js'],
                 callback);
 });

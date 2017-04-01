@@ -1,12 +1,11 @@
 const path = require('path');
 const jetpack = require('fs-jetpack');
 const rollup = require('rollup').rollup;
-
-//console.log("before rollup-plugin-typescript2")
+const utils=require("./utils");
 
 const typescript =require('rollup-plugin-typescript2');
-
-//console.log("after rollup-plugin-typescript2");
+const uglify=require('rollup-plugin-uglify');
+const minify=require('uglify-js-harmony').minify;
 
 const nodeBuiltInModules = ['assert', 'buffer', 'child_process', 'cluster',
   'console', 'constants', 'crypto', 'dgram', 'dns', 'domain', 'events',
@@ -43,7 +42,13 @@ module.exports = (src, dest, opts) => {
     entry: src,
     external: generateExternalModulesList(),
     cache: cached[src],
-    plugins: plugins.concat(options.rollupPlugins || []),
+    plugins: plugins.concat(options.rollupPlugins || []).
+       concat( utils.isProd()?uglify({  
+             compress: {
+                    unused: false
+             },
+             //mangle:false
+        }, minify):[]),
   })
   .then((bundle) => {
     cached[src] = bundle;
@@ -51,7 +56,7 @@ module.exports = (src, dest, opts) => {
     const jsFile = path.basename(dest);
     const result = bundle.generate({
       format: 'cjs',
-      sourceMap: true,
+      sourceMap: !utils.isProd(),
       sourceMapFile: jsFile,
     });
     // Wrap code in self invoking function so the constiables don't
@@ -59,7 +64,7 @@ module.exports = (src, dest, opts) => {
     const isolatedCode = `(function () {${result.code}\n}());`;
     return Promise.all([
       jetpack.writeAsync(dest, `${isolatedCode}\n//# sourceMappingURL=${jsFile}.map`),
-      jetpack.writeAsync(`${dest}.map`, result.map.toString()),
+      !utils.isProd() && jetpack.writeAsync(`${dest}.map`, result.map.toString()),
     ]);
   });
 };
