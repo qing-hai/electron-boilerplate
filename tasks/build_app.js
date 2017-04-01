@@ -47,6 +47,10 @@ gulp.task('html', () => {
    .pipe(gulp.dest(destDir.path()));
 });
 
+// gulp.task('package-json', () => {
+//   return gulp.src(srcDir.path('package.json'))
+//    .pipe(gulp.dest(destDir.path()));
+// });
 
 gulp.task('environment', () => {
   const configFile = `config/env_${utils.getEnvName()}.json`;
@@ -80,17 +84,17 @@ gulp.task('copy-node-modules', function(){
                       '!./src/node_modules/**/*.h',
                       '!./src/node_modules/**/*.pdb',
                       '!./src/node_modules/**/*.obj',
-                      '!./src/node_modules/lodash/**',
-                      '!./src/node_modules/faker/**',
-                      '!./src/node_modules/knex/**',
-                      '!./src/node_modules/docxtemplater/**',
-                      '!./src/node_modules/moment/**',
-                      '!./src/node_modules/moment-timezone/**',
-                      '!./src/node_modules/vue/**',
-                      '!./src/node_modules/linebreak/**',
-                      '!./src/node_modules/esprima-fb/**',
-                      '!./src/node_modules/asyncawait/node_modules/lodash/**',
-                      '!./src/node_modules/fibers/build/**',
+                      //'!./src/node_modules/lodash/**',
+                      // '!./src/node_modules/faker/**',
+                      // '!./src/node_modules/knex/**',
+                      // '!./src/node_modules/docxtemplater/**',
+                      // '!./src/node_modules/moment/**',
+                      // '!./src/node_modules/moment-timezone/**',
+                      // '!./src/node_modules/vue/**',
+                      // '!./src/node_modules/linebreak/**',
+                      // '!./src/node_modules/esprima-fb/**',
+                      // '!./src/node_modules/asyncawait/node_modules/lodash/**',
+                      // '!./src/node_modules/fibers/build/**',
 
                       '!./src/node_modules/kerberos/bin/**',
                       '!./src/node_modules/kerberos/build/*.*',
@@ -138,11 +142,11 @@ gulp.task('watch', () => {
 
 gulp.task('build',function(callback) {
    if (!utils.isProd()){
-      runSequence(['clean','clean-dist'],
+      runSequence(['clean'],
                 ['link-modules','bundle', 'less','html', 'environment'],
                 callback);
    }else
-      runSequence('clean',
-                ['copy-node-modules','bundle', 'less','html', 'environment'],
+      runSequence(['clean','clean-dist'],
+                ['copy-node-modules','bundle','less','html', 'environment'],
                 callback);
 });

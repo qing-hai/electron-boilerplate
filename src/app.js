@@ -15,9 +15,10 @@ const appDir = jetpack.cwd(app.getAppPath());
 
 const electronLocalshortcut =  remote.require("electron-localshortcut");
 
-let win=remote.BrowserWindow.getFocusedWindow();
-win && electronLocalshortcut.register(win, 'Ctrl+B', () => {
-  console.log('You pressed ctrl & B');
+let win=remote.getCurrentWindow();
+win && electronLocalshortcut.register(win, 'Alt+1', () => {
+  console.log("toggle devtools");
+  remote.getCurrentWindow().toggleDevTools();
 });
 
 

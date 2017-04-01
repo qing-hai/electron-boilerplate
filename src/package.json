@@ -7,7 +7,7 @@
   "version": "0.0.1",
   "author": "qinghai <qinghai@gmail.com>",
   "license": "commercial",
-  "main": "app.js",
+  "main": "background.js",
   "dependencies": {
     "electron-debug": "^1.1.0",
     "electron-is-dev": "^0.1.2",
